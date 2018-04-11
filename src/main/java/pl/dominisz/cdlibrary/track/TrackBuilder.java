@@ -1,9 +1,5 @@
-package pl.dominisz.cdlibrary;
+package pl.dominisz.cdlibrary.track;
 
-/**
- * http://dominisz.pl
- * 05.04.2018
- */
 public class TrackBuilder {
 
     private String title;

@@ -1,4 +1,4 @@
-package pl.dominisz.cdlibrary;
+package pl.dominisz.cdlibrary.track;
 
 /**
  * http://dominisz.pl

@@ -1,6 +1,10 @@
 package pl.dominisz.cdlibrary;
 
 import org.junit.jupiter.api.Test;
+import pl.dominisz.cdlibrary.cd.CD;
+import pl.dominisz.cdlibrary.cd.CDBuilder;
+import pl.dominisz.cdlibrary.track.Track;
+import pl.dominisz.cdlibrary.track.TrackBuilder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

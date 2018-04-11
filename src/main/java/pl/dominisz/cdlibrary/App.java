@@ -1,77 +1,68 @@
 package pl.dominisz.cdlibrary;
 
-import java.util.ArrayList;
-import java.util.List;
+import pl.dominisz.cdlibrary.cd.CDLibrary;
+import pl.dominisz.cdlibrary.finder.Finder;
+import pl.dominisz.cdlibrary.menu.CDDisplay;
+import pl.dominisz.cdlibrary.menu.CDReader;
+
 import java.util.Scanner;
 
-/**
- * http://dominisz.pl
- * 25.03.2018
- */
 public class App {
-
-    private CDLibrary cdLibrary = new CDLibrary();
+    private final static String FILENAME = "cdlibrary.txt";
+    private CDLibrary cdLibrary =  new CDLibrary();
     private Scanner scanner = new Scanner(System.in);
+    //private CDReader CDReader = new CDReader(cdLibrary, scanner);
+    private Finder finder = new Finder(cdLibrary, scanner);
+
 
     public void showMainMenu() {
-        cdLibrary.loadFromFile();
+        cdLibrary.loadFromFile(FILENAME);
         boolean exit = false;
         while (!exit) {
             System.out.println("1. Add new CD");
             System.out.println("2. Show all CDs");
-            System.out.println("3. Exit");
+            System.out.println("3. Find CD by artist.");
+            System.out.println("4. Show all artist.");
+            System.out.println("5. Show all CDs by title that contains.");
+            System.out.println("6. Show all track by titla that contains.");
+            System.out.println("7. Show all CDs by track title.");
+            System.out.println("8. Show all CDs by genre.");
+            System.out.println("K. Exit");
             int option = Integer.parseInt(scanner.nextLine());
             switch (option) {
                 case 1:
-                    addNewCD();
+                    CDReader CDReader = new CDReader(cdLibrary, scanner);
+                    CDReader.addNewCD();
                     break;
                 case 2:
-                    showAllCDs();
+                    CDDisplay display = new CDDisplay();
+                    display.show(cdLibrary.getCDs());
+                    break;
+                case 3:
+                    finder.findByArtist();
+                    break;
+                case 4:
+                    finder.findAllArtists();
+                    break;
+                case 5:
+                    finder.findCDThatContains();
+                    break;
+                case 6:
+                    finder.findTrackbyTitleThatContains();
+                    break;
+                case 7:
+                    finder.findCDByTrackTitle();
+                    break;
+                case 8:
+                    finder.findCDByGenre();
                     break;
                 default:
                     exit = true;
             }
         }
-        cdLibrary.saveToFile();
+        cdLibrary.saveToFile(FILENAME);
     }
 
-    private void showAllCDs() {
-
-    }
-
-    private void addNewCD() {
-        System.out.println("Enter CD info");
-        System.out.println("Title:");
-        String title = scanner.nextLine();
-        System.out.println("Artist:");
-        String artist = scanner.nextLine();
-        System.out.println("Release year:");
-        int releaseYear = Integer.parseInt(scanner.nextLine());
-        System.out.println("Producer:");
-        String producer = scanner.nextLine();
-        Genre genre = readGenre();
-        List<Track> tracks = readTracks();
-        System.out.println("Is original (yes/no):");
-        boolean original = "yes".equals(scanner.nextLine());
-        System.out.println("Disc count:");
-        int discCount = Integer.parseInt(scanner.nextLine());
-        //create CD
-        //add to CDLibrary
-    }
-
-    private List<Track> readTracks() {
-        return new ArrayList<>();
-    }
-
-    private Genre readGenre() {
-        Genre[] genres = Genre.values();
-        for (int i = 0; i < genres.length; i++) {
-            System.out.println((i + 1) + " " + genres[i].getDescription());
-        }
-        System.out.println("Choose number:");
-        int number = Integer.parseInt(scanner.nextLine());
-        return genres[number - 1];
-    }
 
     public static void main(String[] args) {
         App app = new App();

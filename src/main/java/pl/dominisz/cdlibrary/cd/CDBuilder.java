@@ -1,4 +1,7 @@
-package pl.dominisz.cdlibrary;
+package pl.dominisz.cdlibrary.cd;
+
+import pl.dominisz.cdlibrary.track.Genre;
+import pl.dominisz.cdlibrary.track.Track;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +19,7 @@ public class CDBuilder {
     private Genre genre;
     private boolean isOriginal;
     private int discCount;
-    private List<Track> tracks;
+    private List<Track> tracks = new ArrayList<>();
 
     public CDBuilder setTitle(String title) {
         this.title = title;
@@ -54,15 +57,12 @@ public class CDBuilder {
     }
 
     public CDBuilder setTrack(Track track) {
-        if (tracks == null) {
-            this.tracks = new ArrayList<>();
-        }
-        tracks.add(track);
+        this.tracks.add(track);
         return this;
     }
 
     public CDBuilder setTracks(List<Track> tracks) {
-        this.tracks = tracks;
+            this.tracks.addAll(tracks);
         return this;
     }
 
